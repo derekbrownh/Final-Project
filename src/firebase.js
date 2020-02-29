@@ -3,14 +3,14 @@ import "firebase/auth";
 import "firebase/firestore";
 
 const config = {
-  apiKey: "AIzaSyDqKTdlVA2IAXL-BeqW8AuuDu_9ymXk7bc",
-  authDomain: "authv2-173b7.firebaseapp.com",
-  databaseURL: "https://authv2-173b7.firebaseio.com",
-  projectId: "authv2-173b7",
-  storageBucket: "authv2-173b7.appspot.com",
-  messagingSenderId: "900822893119",
-  appId: "1:900822893119:web:dc47b5b6fc7e9c116a2e8a",
-  measurementId: "G-G6CFMPM1TW"
+  apiKey: "AIzaSyDdvb8rt3ZjjHKE0UoC9CTymTo3Btty-u0",
+  authDomain: "final-project-f90b1.firebaseapp.com",
+  databaseURL: "https://final-project-f90b1.firebaseio.com",
+  projectId: "final-project-f90b1",
+  storageBucket: "final-project-f90b1.appspot.com",
+  messagingSenderId: "907142284295",
+  appId: "1:907142284295:web:6f6120ff815feae0a896a2",
+  measurementId: "G-2HNV7V5BMB"
 };
 
 firebase.initializeApp(config);
