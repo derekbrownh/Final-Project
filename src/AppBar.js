@@ -43,7 +43,7 @@ export function AppBarFun(props) {
 
   return (
     <div>
-      <AppBar position="static" color="primary">
+      <AppBar position="static" color='primary'>
         <Toolbar style={{ display: "flex" }}>
           <IconButton color="inherit" onClick={() => setDrawerOpen(true)}>
             <MenuIcon />
@@ -53,7 +53,7 @@ export function AppBarFun(props) {
             color="inherit"
             style={{ flexGrow: 1, marginleft: 30 }}
           >
-            My App
+            Ubgab
           </Typography>
           <Typography color="inherit" style={{ marginRight: 30 }}>
             Hi! {user.email}

@@ -9,7 +9,7 @@ export default function App(props) {
     <AppBarFun></AppBarFun>
     <div style = {{display: 'flex', alignItems: 'center'}}>
       <Paper style = {{height: 200, width: 600, marginTop: 40, marginLeft: 40}}height = '200px'>
-        
+        hello
       </Paper>
     </div>
     </div>

@@ -6,6 +6,11 @@ import App from "./App";
 import { SignIn, SignUp } from "./Authentication";
 import { BrowserRouter, Route} from "react-router-dom"
 
+// const {
+//     receivePublicToken,
+//     getTransactions
+//     } = require("./controllers/controller");
+
 ReactDOM.render(
     <BrowserRouter>
         <div>
