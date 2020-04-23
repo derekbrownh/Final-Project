@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import CalendarTab from "./Calendar"
 
 import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
@@ -7,7 +8,9 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import Drawer from "@material-ui/core/Drawer";
 import MenuIcon from "@material-ui/icons/Menu";
-// import { Link} from "react-router-dom";
+import CalendarTodaySharpIcon from "@material-ui/icons/CalendarTodaySharp";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import { Link, Route } from "react-router-dom";
 import { auth } from "./firebase";
 
 export function AppBarFun(props) {
@@ -15,7 +18,7 @@ export function AppBarFun(props) {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(u => {
+    const unsubscribe = auth.onAuthStateChanged((u) => {
       if (u) {
         setUser(u);
       } else {
@@ -32,7 +35,7 @@ export function AppBarFun(props) {
       .then(() => {
         props.history.push("/");
       })
-      .catch(error => {
+      .catch((error) => {
         alert(error.message);
       });
   };
@@ -43,7 +46,7 @@ export function AppBarFun(props) {
 
   return (
     <div>
-      <AppBar position="static" color='primary'>
+      <AppBar position="static" color="primary">
         <Toolbar style={{ display: "flex" }}>
           <IconButton color="inherit" onClick={() => setDrawerOpen(true)}>
             <MenuIcon />
@@ -55,6 +58,16 @@ export function AppBarFun(props) {
           >
             Ubgab
           </Typography>
+          <CalendarTodaySharpIcon
+            style={{ marginRight: 30}}
+            color = 'primary'
+            button
+            to={"app/calendar"}
+            component={Link}
+          />
+          <AccountCircleIcon style={{ marginRight: 20 }} fontSize="medium" button
+            to={"app/account"}
+            component={Link}/>
           <Typography color="inherit" style={{ marginRight: 30 }}>
             Hi! {user.email}
           </Typography>
@@ -72,6 +85,12 @@ export function AppBarFun(props) {
       >
         <div>Hello</div>
       </Drawer>
+      <Route
+        path="/app/feed"
+        render={routeProps => {
+          return <CalendarTab user={user} {...routeProps} />;
+        }}
+      />
     </div>
   );
 }

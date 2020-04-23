@@ -1,14 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { AppBarFun } from "./AppBar";
+import {CalendarTab} from "./Calendar"
 
 import Paper from "@material-ui/core/Paper";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Fab from "@material-ui/core/Fab";
+import Typography from "@material-ui/core/Typography";
 import EditIcon from "@material-ui/icons/Edit";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Calendar from 'react-calendar'
+import 'react-calendar/dist/Calendar.css';
+
 import { Link, Route } from "react-router-dom";
 
+import Recurring from './Recurring'
 export default function App(props) {
   return (
     <div>
@@ -20,59 +31,29 @@ export default function App(props) {
             height: 800,
             display: "flex",
             flexDirection: "column",
-            marginRight: 10,
-            marginTop: 10,
+  
+            AlignItems: "center"
           }}
           height="150"
         >
-          <Paper
-            style={{
-              width: 350,
-              height: 100,
-              alignSelf: "center",
-              marginRight: 10,
-              marginTop: 10,
-              marginLeft: 10,
-              marginBottom: 10,
-              display: "flex",
-              flexDirection: "column",
-            }}
-            marginTop="15"
-            marginLeft="15"
-          >
-            <div style={{ backgroundColor: "green", height: "50px", display: 'flex' }}>
-              <div style = {{flexGrow: 1}}>Friends</div>
-              <div>
-                <Fab color="primary" aria-label="edit" Fab size="small">
-                  <EditIcon />
-                </Fab>
-              </div>
-            </div>
-            <div style={{ backgroundColor: "red", height: "35px" }}>Charge</div>
-            <div style={{ backgroundColor: "blue", height: "30px" }}>
-              Details
-            </div>
-          </Paper>
-          <Paper
-            style={{
-              width: 350,
-              height: 100,
-              alignSelf: "center",
-              marginRight: 10,
-              marginTop: 10,
-              marginLeft: 10,
-              marginBottom: 10,
-            }}
-            marginTop="15"
-            marginLeft="15"
-          >
-            hello
-          </Paper>
-          <List>
-            <ListItem button to={"/app/feed/"} component={Link}>
-              <ListItemText primary="Public Feed"></ListItemText>
-            </ListItem>
-          </List>
+          <Recurring style = {{alignSelf: "center"}}/>
+          <Recurring/>
+        </Paper>
+        <Paper style = {{display: 'flex', flexGrow: 1}}>
+          <div style = {{display: 'flex', flexDirection: 'column', flexGrow: 1}}>
+        <Tabs
+          indicatorColor="secondary"
+          textColor="primary"
+        >
+          <Tab label="Friends" textColorSecondary/>
+          <Tab label="Personal" />
+        </Tabs>
+        <Paper style = {{flexGrow: 1}}>
+          <Calendar/>
+
+        </Paper>
+        </div>
+        
         </Paper>
       </div>
     </div>
