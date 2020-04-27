@@ -9,6 +9,8 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import Avatar from "@material-ui/core/Avatar";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 
+import RecurringDetails from "./RecDetails"
+
 export default function Reccuring(props) {
   return (
     <div>
@@ -44,19 +46,23 @@ export default function Reccuring(props) {
         <div style={{ height: "35px" }}>
           <div style={{ display: "flex", flexGrow: 1, alignItems: "center" }}>
             <AddCircleOutlineIcon fontSize="large" />
-            <Typography>Internet Bill</Typography>
+      <Typography>Internet Bill</Typography>
             <div style={{ flexGrow: 1 }} />
             <Typography>Cycle Date: May 1</Typography>
           </div>
         </div>
         <div style={{ height: "30px" }}>
           <div style={{ display: "flex", flexGrow: 1, alignItems: "center" }}>
-            <Typography>Accumulative Payment: $100</Typography>
+      <Typography>Accumulative Payment: {props.t.TotalPayments}</Typography>
             <div style={{ flexGrow: 1 }} />
-            <Typography>Monthly</Typography>
+      <Typography>{props.t.id}</Typography>
           </div>
         </div>
       </Paper>
+
+      <RecurringDetails/>
+
+
     </div>
   );
 }
