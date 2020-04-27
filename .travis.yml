@@ -7,7 +7,7 @@ script:
   - cd functions && npm install
   - cd ..
 deploy:
-  cleanup: false
+  skip_cleanup: true
   provider: firebase
   token: $FIREBASE_TOKEN
   project: final-project-v2-d6704
