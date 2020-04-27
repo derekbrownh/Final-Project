@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Typography from "@material-ui/core/Typography";
 
-export function friendsFeed(props) {
+export function friendFeed(props) {
   return (
     <div>
       <Typography>Friends</Typography>

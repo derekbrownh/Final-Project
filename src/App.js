@@ -21,7 +21,8 @@ import Recurring from "./Recurring";
 import RecurringDetails from "./RecDetails";
 import Reccuring from "./Recurring";
 // import VirtualizedList from "./FeedFriends";
-import { friendsFeed } from "./friendsFeed";
+import { friendFeed } from "./friendsFeed";
+import {AccountPage} from "./AccountDetails"
 
 export default function App(props) {
   const [homepageToggle, setHomepageToggle] = useState(true);
@@ -76,6 +77,24 @@ export default function App(props) {
             </Tabs>
             <Paper style={{ flexGrow: 1 }}>
               {homepageToggle ? <friendsFeed></friendsFeed> : "personal"}
+              <Route
+                path="/app/friends"
+                render={(routeProps) => {
+                  return <friendFeed  {...routeProps} />;
+                }}
+              />
+              <Route
+                path="/app/account"
+                render={(routeProps) => {
+                  return <AccountPage  {...routeProps} />;
+                }}
+              />
+              <Route
+                path="/app/calendar"
+                render={(routeProps) => {
+                  return <Calendar  {...routeProps} />;
+                }}
+              />
             </Paper>
           </div>
         </Paper>

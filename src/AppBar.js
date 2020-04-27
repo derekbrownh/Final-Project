@@ -60,13 +60,13 @@ export function AppBarFun(props) {
           </Typography>
           <CalendarTodaySharpIcon
             style={{ marginRight: 30}}
-            // button
-            // to={"app/calendar"}
-            // component={Link}
+            button
+            to={"/app/calendar"}
+            component={Link}
           />
           <AccountCircleIcon style={{ marginRight: 20 }} fontSize="medium" button
-            // to={"app/account"}
-            // component={Link}
+            to={"/app/account"}
+            component={Link}
             />
           <Typography color="inherit" style={{ marginRight: 30 }}>
             Hi! {user.email}
