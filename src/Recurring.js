@@ -12,6 +12,8 @@ import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import RecurringDetails from "./RecDetails"
 
 export default function Reccuring(props) {
+  const [dialog_open, setDialogOpen] = useState(false);
+
   return (
     <div>
       <Paper
@@ -37,8 +39,14 @@ export default function Reccuring(props) {
             <AccountCircleIcon />
             <div style={{ flexGrow: 1 }}></div>
             <div>
-              <Fab aria-label="edit" Fab size="small">
-                <EditIcon />
+              <Fab aria-label="edit" Fab size="small"
+              button
+              onClick={() => {
+                setDialogOpen(true);
+              }}
+              >
+                <EditIcon 
+                />
               </Fab>
             </div>
           </div>
@@ -60,9 +68,12 @@ export default function Reccuring(props) {
         </div>
       </Paper>
 
-      <RecurringDetails/>
-
-
+      <RecurringDetails
+            open = {dialog_open}
+            onClose = {()=> {
+              setDialogOpen(false);
+            }}
+          />
     </div>
   );
 }

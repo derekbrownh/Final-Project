@@ -20,6 +20,7 @@ import { Link, Route } from "react-router-dom";
 import Recurring from "./Recurring";
 import RecurringDetails from "./RecDetails"
 import Reccuring from "./Recurring";
+import VirtualizedList from "./FeedFriends";
 
 export default function App(props) {
   const [homepageToggle, setHomepageToggle] = useState(true);
@@ -27,7 +28,7 @@ export default function App(props) {
     { id: 0, title: "Internet Bill", Date: "May 1", Schedule: "Monthly", TotalPayment: "100" },
     { id: 1, title: "Phone Bill", Date: "May 1", Schedule: "Monthly", TotalPayment: "1200"}
   ]);
-  const [dialog_open, setDialogOpen] = useState(true);
+  const [dialog_open, setDialogOpen] = useState(false);
 
   return (
     <div>
@@ -66,7 +67,7 @@ export default function App(props) {
               <Tab label="Personal" onClick={() => setHomepageToggle(false)} />
             </Tabs>
             <Paper style={{ flexGrow: 1 }}>
-              {homepageToggle ? <div>friends</div> : 'personal'}
+              {homepageToggle ? <div><VirtualizedList/></div> : 'personal'}
             </Paper>
           </div>
         </Paper>
