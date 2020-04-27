@@ -18,15 +18,28 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { Link, Route } from "react-router-dom";
 import Recurring from "./Recurring";
-import RecurringDetails from "./RecDetails"
+import RecurringDetails from "./RecDetails";
 import Reccuring from "./Recurring";
-import VirtualizedList from "./FeedFriends";
+// import VirtualizedList from "./FeedFriends";
+import { friendsFeed } from "./friendsFeed";
 
 export default function App(props) {
   const [homepageToggle, setHomepageToggle] = useState(true);
   const [RecTransactions, setRecTransactions] = useState([
-    { id: 0, title: "Internet Bill", Date: "May 1", Schedule: "Monthly", TotalPayment: "100" },
-    { id: 1, title: "Phone Bill", Date: "May 1", Schedule: "Monthly", TotalPayment: "1200"}
+    {
+      id: 0,
+      title: "Internet Bill",
+      Date: "May 1",
+      Schedule: "Monthly",
+      TotalPayment: "100",
+    },
+    {
+      id: 1,
+      title: "Phone Bill",
+      Date: "May 1",
+      Schedule: "Monthly",
+      TotalPayment: "1200",
+    },
   ]);
   const [dialog_open, setDialogOpen] = useState(false);
 
@@ -45,14 +58,9 @@ export default function App(props) {
           }}
           height="150"
         >
-          {RecTransactions.map(t => {
-            return(
-            <Reccuring 
-              t = {RecTransactions}
-            />
-            );
+          {RecTransactions.map((t) => {
+            return <Reccuring t={RecTransactions} />;
           })}
-
         </Paper>
         <Paper style={{ display: "flex", flexGrow: 1 }}>
           <div
@@ -67,19 +75,18 @@ export default function App(props) {
               <Tab label="Personal" onClick={() => setHomepageToggle(false)} />
             </Tabs>
             <Paper style={{ flexGrow: 1 }}>
-              {homepageToggle ? <div><VirtualizedList/></div> : 'personal'}
+              {homepageToggle ? <friendsFeed></friendsFeed> : "personal"}
             </Paper>
           </div>
         </Paper>
       </div>
 
-          <RecurringDetails
-            open = {dialog_open}
-            onClose = {()=> {
-              setDialogOpen(false);
-            }}
-          />
-
+      <RecurringDetails
+        open={dialog_open}
+        onClose={() => {
+          setDialogOpen(false);
+        }}
+      />
     </div>
   );
 }

@@ -23,7 +23,9 @@ import DateFnsUtils from '@date-io/date-fns';
 
 
 export default function RecurringDetails(props) {
-  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [date, setDate] = useState("");
+  const [merchantID, setMerchantID] = useState("");
   const [selectedDate, setSelectedDate] = useState('2014-08-18T21:11:54');
 
   const handleDateChange = (date: Date | null) => {
@@ -47,17 +49,17 @@ export default function RecurringDetails(props) {
           label="Transaction Description"
           fullWidth={true}
           onChange={(e) => {
-            setName(e.target.value);
+            setDescription(e.target.value);
           }}
-          value={name}
+          value={description}
         />
         <TextField
           label="Add Date"
           fullWidth={true}
           onChange={(e) => {
-            setName(e.target.value);
+            setDate(e.target.value);
           }}
-          value={name}
+          value={date}
         />
         {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
 
@@ -68,9 +70,9 @@ export default function RecurringDetails(props) {
           label="Select Merchant ID"
           fullWidth={true}
           onChange={(e) => {
-            setName(e.target.value);
+            setMerchantID(e.target.value);
           }}
-          value={name}
+          value={merchantID}
         />
       </DialogContent>
       <DialogActions>
