@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Typography from "@material-ui/core/Typography";
 
-export function friendFeed(props) {
+export function PersonalTab(props) {
   return (
     <div>
-      <Typography>Friends</Typography>
+      <Typography>Personal</Typography>
+      
     </div>
   );
 }

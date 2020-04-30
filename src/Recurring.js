@@ -9,7 +9,7 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import Avatar from "@material-ui/core/Avatar";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 
-import RecurringDetails from "./RecDetails"
+import RecurringDetails from "./EditTransaction"
 
 export default function Reccuring(props) {
   const [dialog_open, setDialogOpen] = useState(false);
@@ -34,6 +34,7 @@ export default function Reccuring(props) {
         <div style={{ height: "50px", display: "flex" }}>
           <div style={{ display: "flex", flexGrow: 1, alignItems: "center" }}>
             <Typography>Members:</Typography>
+            {console.log(props)}
             <AccountCircleIcon />
             <AccountCircleIcon />
             <AccountCircleIcon />
@@ -54,16 +55,16 @@ export default function Reccuring(props) {
         <div style={{ height: "35px" }}>
           <div style={{ display: "flex", flexGrow: 1, alignItems: "center" }}>
             <AddCircleOutlineIcon fontSize="large" />
-      <Typography>Internet Bill</Typography>
+            <Typography>{props.title}</Typography>
             <div style={{ flexGrow: 1 }} />
             <Typography>Cycle Date: May 1</Typography>
           </div>
         </div>
         <div style={{ height: "30px" }}>
           <div style={{ display: "flex", flexGrow: 1, alignItems: "center" }}>
-      <Typography>Accumulative Payment: {props.t.TotalPayments}</Typography>
+            <Typography>Accumulative Payment: </Typography> <Typography>{props.TotalPayment}</Typography>
             <div style={{ flexGrow: 1 }} />
-      <Typography>{props.t.id}</Typography>
+      <Typography>Monthly</Typography>
           </div>
         </div>
       </Paper>

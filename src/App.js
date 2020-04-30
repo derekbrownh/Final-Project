@@ -1,32 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { AppBarFun } from "./AppBar";
-import { CalendarTab } from "./Calendar";
 
 import Paper from "@material-ui/core/Paper";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Fab from "@material-ui/core/Fab";
 import Typography from "@material-ui/core/Typography";
-import EditIcon from "@material-ui/icons/Edit";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { Link, Route } from "react-router-dom";
-import Recurring from "./Recurring";
-import RecurringDetails from "./RecDetails";
+import RecurringDetails from "./EditTransaction";
 import Reccuring from "./Recurring";
-// import VirtualizedList from "./FeedFriends";
-import { friendFeed } from "./friendsFeed";
-import {AccountPage} from "./AccountDetails"
+import { FriendsTab } from "./Friends";
+import { AccountPage } from "./AccountDetails";
+import { PersonalTab } from "./Personal";
+import AddTrans from "./AddTransaction";
+import { auth, db, snapshotToArray } from "./firebase";
 
 export default function App(props) {
-  const [homepageToggle, setHomepageToggle] = useState(true);
-  const [RecTransactions, setRecTransactions] = useState([
+  const [Transactions, setTransactions] = useState([
     {
       id: 0,
       title: "Internet Bill",
@@ -42,7 +33,47 @@ export default function App(props) {
       TotalPayment: "1200",
     },
   ]);
-  const [dialog_open, setDialogOpen] = useState(false);
+  const [transaction_open, setTransactionOpen] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((u) => {
+      if (u) {
+        setUser(u);
+      } else {
+        props.history.push("/");
+      }
+    });
+
+    return unsubscribe;
+  }, [props.history]);
+
+  useEffect(() => {
+    if (user) {
+      db.collection("users")
+        .doc(user.uid)
+        .collection("transactions")
+        .onSnapshot((snapshot) => {
+          const updated_transactions = snapshotToArray(snapshot);
+          setTransactions(updated_transactions);
+        });
+    }
+  }, [user]);
+
+  const handleSignOut = () => {
+    auth
+      .signOut()
+      .then(() => {
+        props.history.push("/");
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
+
+  if (!user) {
+    return <div />;
+  }
 
   return (
     <div>
@@ -59,9 +90,48 @@ export default function App(props) {
           }}
           height="150"
         >
-          {RecTransactions.map((t) => {
-            return <Reccuring t={RecTransactions} />;
+          {Transactions.map((t) => {
+            return (
+            <Reccuring key = {t.id} title = {t.title}/>
+            );
           })}
+          <div>
+            <Paper
+              style={{
+                width: 350,
+                height: 50,
+                alignSelf: "center",
+                marginRight: 10,
+                marginTop: 10,
+                marginLeft: 10,
+                marginBottom: 10,
+                display: "flex",
+                flexDirection: "column",
+              }}
+              marginTop="15"
+              marginLeft="15"
+            >
+              <div style={{ height: "50px", display: "flex" }}>
+                <div
+                  style={{ display: "flex", flexGrow: 1, alignItems: "center" }}
+                  button
+                  onClick={() => {
+                    setTransactionOpen(true);
+                  }}
+                >
+                  <Typography>Add Transaction</Typography>
+                </div>
+              </div>
+            </Paper>
+
+            <AddTrans
+              open={transaction_open}
+              onClose={() => {
+                setTransactionOpen(false);
+              }}
+              user={user}
+            />
+          </div>
         </Paper>
         <Paper style={{ display: "flex", flexGrow: 1 }}>
           <div
@@ -71,41 +141,46 @@ export default function App(props) {
               <Tab
                 label="Friends"
                 textColorSecondary
-                onClick={() => setHomepageToggle(true)}
+                button
+                to={"/app/friends"}
+                component={Link}
               />
-              <Tab label="Personal" onClick={() => setHomepageToggle(false)} />
+              <Tab
+                label="Personal"
+                button
+                to={"/app/personal"}
+                component={Link}
+              />
             </Tabs>
             <Paper style={{ flexGrow: 1 }}>
-              {homepageToggle ? <friendsFeed></friendsFeed> : "personal"}
               <Route
                 path="/app/friends"
                 render={(routeProps) => {
-                  return <friendFeed  {...routeProps} />;
+                  return <FriendsTab {...routeProps} />;
+                }}
+              />
+              <Route
+                path="/app/personal"
+                render={(routeProps) => {
+                  return <PersonalTab {...routeProps} />;
                 }}
               />
               <Route
                 path="/app/account"
                 render={(routeProps) => {
-                  return <AccountPage  {...routeProps} />;
+                  return <AccountPage {...routeProps} />;
                 }}
               />
               <Route
                 path="/app/calendar"
                 render={(routeProps) => {
-                  return <Calendar  {...routeProps} />;
+                  return <Calendar {...routeProps} />;
                 }}
               />
             </Paper>
           </div>
         </Paper>
       </div>
-
-      <RecurringDetails
-        open={dialog_open}
-        onClose={() => {
-          setDialogOpen(false);
-        }}
-      />
     </div>
   );
 }

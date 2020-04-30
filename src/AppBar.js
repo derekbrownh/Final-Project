@@ -12,6 +12,8 @@ import CalendarTodaySharpIcon from "@material-ui/icons/CalendarTodaySharp";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { Link, Route } from "react-router-dom";
 import { auth } from "./firebase";
+import { green } from '@material-ui/core/colors';
+import { blueGrey } from '@material-ui/core/colors';
 
 export function AppBarFun(props) {
   const [drawer_open, setDrawerOpen] = useState(false);
@@ -35,7 +37,7 @@ export function AppBarFun(props) {
       .then(() => {
         props.history.push("/");
       })
-      .catch((error) => {
+      .catch(error => {
         alert(error.message);
       });
   };
@@ -46,7 +48,7 @@ export function AppBarFun(props) {
 
   return (
     <div>
-      <AppBar position="static" color="primary">
+      <AppBar position="static" style = {{colorPrimary: blueGrey[900]}}>
         <Toolbar style={{ display: "flex" }}>
           <IconButton color="inherit" onClick={() => setDrawerOpen(true)}>
             <MenuIcon />
@@ -59,11 +61,14 @@ export function AppBarFun(props) {
             Ubgab
           </Typography>
           <CalendarTodaySharpIcon
+            style={{ color: green[500] }}
             style={{ marginRight: 30}}
             button
             to={"/app/calendar"}
             component={Link}
-          />
+            >
+             
+          </CalendarTodaySharpIcon>
           <AccountCircleIcon style={{ marginRight: 20 }} fontSize="medium" button
             to={"/app/account"}
             component={Link}
