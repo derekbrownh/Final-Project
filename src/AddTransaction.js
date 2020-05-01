@@ -7,18 +7,10 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import TextField from "@material-ui/core/TextField";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import Typography from "@material-ui/core/Typography";
 import { db } from "./firebase";
 
 import "date-fns";
-import Grid from "@material-ui/core/Grid";
-import DateFnsUtils from "@date-io/date-fns";
-// import {
-//   MuiPickersUtilsProvider,
-//   KeyboardTimePicker,
-//   KeyboardDatePicker,
-// } from '@material-ui/pickers';
 
 export default function AddTrans(props) {
   const [title, setTitle] = useState("");
@@ -26,10 +18,6 @@ export default function AddTrans(props) {
   const [date, setDate] = useState("");
   const [merchantID, setMerchantID] = useState("");
   const [selectedDate, setSelectedDate] = useState("2014-08-18T21:11:54");
-
-  const handleDateChange = (date: Date | null) => {
-    setSelectedDate(date);
-  };
 
   const handleSaveTransaction = () => {
     db.collection("users")
@@ -41,7 +29,7 @@ export default function AddTrans(props) {
         date: date,
         merchantID: merchantID,
       })
-      .then(setTitle(""), setDescription(""), setMerchantID(""), setDate(""));
+      .then(setTitle(""), setDescription(""), setMerchantID(""), setDate(""), props.onClose());
   };
   return (
     <Dialog

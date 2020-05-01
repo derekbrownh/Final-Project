@@ -1,6 +1,7 @@
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import "firebase/storage";
 
 const config = {
   apiKey: "AIzaSyAOW8PoLAr2XiCobNTjtEa0Ubi8To22v8A",
@@ -18,6 +19,8 @@ firebase.initializeApp(config);
 export const auth = firebase.auth();
 
 export const db = firebase.firestore();
+
+export const storage = firebase.storage();
 
 export function snapshotToArray(snapshot) {
   const updated_array = []

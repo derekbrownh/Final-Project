@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 import Paper from "@material-ui/core/Paper";
-import Fab from "@material-ui/core/Fab";
 import Typography from "@material-ui/core/Typography";
-import EditIcon from "@material-ui/icons/Edit";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import Avatar from "@material-ui/core/Avatar";
-import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 
 import RecurringDetails from "./EditTransaction"
 
@@ -30,26 +27,20 @@ export default function Reccuring(props) {
         }}
         marginTop="15"
         marginLeft="15"
+        button
+        onClick={() => {
+          setDialogOpen(true);
+        }}
+
       >
         <div style={{ height: "50px", display: "flex" }}>
           <div style={{ display: "flex", flexGrow: 1, alignItems: "center" }}>
             <Typography>Members:</Typography>
-            {console.log(props)}
+            <Avatar alt = "Derek Brown"/>
             <AccountCircleIcon />
             <AccountCircleIcon />
             <AccountCircleIcon />
             <div style={{ flexGrow: 1 }}></div>
-            <div>
-              <Fab aria-label="edit" Fab size="small"
-              button
-              onClick={() => {
-                setDialogOpen(true);
-              }}
-              >
-                <EditIcon 
-                />
-              </Fab>
-            </div>
           </div>
         </div>
         <div style={{ height: "35px" }}>
