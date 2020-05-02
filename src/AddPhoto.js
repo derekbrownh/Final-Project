@@ -23,7 +23,7 @@ export default function AddAvatar(props) {
       .put(file)
       .then((snapshot) => {
         snapshot.ref.getDownloadURL().then((downloadURL) => {
-          db.collection("users")
+          db.collection("users").doc("LhqdReq2JleZmsS36kTshgwvidl2").collection('avatars')
             // .doc(props.user.uid).collection('avatar') //couldn't figure out how to pass props user through
             .add({ title: title, image: downloadURL })
             .then(() => {
@@ -101,7 +101,6 @@ export default function AddAvatar(props) {
               onChange={handleFile}
               style={{ display: "none" }}
             />
-            {console.log(avatar)}
           </Button>
           {file && <Typography>{file.name}</Typography>}
         </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import AddAvatar from "./AddPhoto";
 import Typography from "@material-ui/core/Typography";
 
@@ -17,8 +17,9 @@ export function AccountPage(props) {
         
         Change User Picture</Typography>
       <Typography>Find Friends</Typography>
-
-
+      <Typography color="inherit" style={{ marginRight: 30 }}>
+            {/* Hi! {props.user.email} */}
+          </Typography>
       <AddAvatar
               open={photo_open}
               onClose={() => {

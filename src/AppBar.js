@@ -5,9 +5,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import Drawer from "@material-ui/core/Drawer";
-import MenuIcon from "@material-ui/icons/Menu";
 import CalendarTodaySharpIcon from "@material-ui/icons/CalendarTodaySharp";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { Link, Route } from "react-router-dom";
@@ -16,21 +13,7 @@ import { green } from '@material-ui/core/colors';
 import { blueGrey } from '@material-ui/core/colors';
 
 export function AppBarFun(props) {
-  const [drawer_open, setDrawerOpen] = useState(false);
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((u) => {
-      if (u) {
-        setUser(u);
-      } else {
-        props.history.push("/");
-      }
-    });
-
-    return unsubscribe;
-  }, [props.history]);
-
+ 
   const handleSignOut = () => {
     auth
       .signOut()
@@ -42,58 +25,41 @@ export function AppBarFun(props) {
       });
   };
 
-  if (!user) {
-    return <div />;
-  }
-
   return (
     <div>
-      <AppBar position="static" style = {{colorPrimary: blueGrey[900]}}>
+      <AppBar position="static" color = "default">
         <Toolbar style={{ display: "flex" }}>
-          <IconButton color="inherit" onClick={() => setDrawerOpen(true)}>
-            <MenuIcon />
-          </IconButton>
-          <Typography
+          <div
             variant="h6"
             color="inherit"
-            style={{ flexGrow: 1, marginleft: 30 }}
+            style={{ flexGrow: 1, paddingLeft: 60 }}
           >
+            <Button>
             Ubgab
-          </Typography>
+            </Button>
+          </div>
           <CalendarTodaySharpIcon
             style={{ color: green[500] }}
             style={{ marginRight: 30}}
             button
             to={"/app/calendar"}
             component={Link}
-            >
-             
-          </CalendarTodaySharpIcon>
+            />
+          <CalendarTodaySharpIcon color = "secondary" ></CalendarTodaySharpIcon>
           <AccountCircleIcon style={{ marginRight: 20 }} fontSize="medium" button
             to={"/app/account"}
             component={Link}
             />
-          <Typography color="inherit" style={{ marginRight: 30 }}>
-            Hi! {user.email}
-          </Typography>
+          
           <Button color="inherit" onClick={handleSignOut}>
             Sign Out
           </Button>
         </Toolbar>
       </AppBar>
-
-      <Drawer
-        open={drawer_open}
-        onClose={() => {
-          setDrawerOpen(false);
-        }}
-      >
-        <div>Hello</div>
-      </Drawer>
       <Route
         path="/app/feed"
         render={routeProps => {
-          return <CalendarTab user={user} {...routeProps} />;
+          return <CalendarTab user={props.user} {...routeProps} />;
         }}
       />
     </div>
