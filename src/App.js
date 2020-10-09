@@ -59,9 +59,10 @@ export default function App(props) {
   if (!user) {
     return <div />;
   }
-
+ 
   return (
     <div>
+      
       <AppBarFun user={user}></AppBarFun>
       <div style={{ display: "flex" }}>
         <div
